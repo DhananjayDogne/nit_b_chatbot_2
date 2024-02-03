@@ -25,7 +25,7 @@ def add_opportunity():
         description = user_input['description']
         location=user_input['location']
         deadline=user_input['deadline']
-       
+        
 
         # Store data in MongoDB database
         db.opportunity.insert_one({'title':title, 'description':description,"location":location, 'deadline':deadline})
@@ -60,5 +60,54 @@ def CustomChatGPT():
     print(ChatGPT_reply)
     return jsonify({"response":ChatGPT_reply})
     
+    
+
+
+
+# Authenticattion 
+
+
+#  login 
+@app.route("/login", methods=["GET", "POST"])
+def Login():
+    if request.method == 'POST':
+        user_input = request.data
+        user_input=literal_eval(user_input.decode('utf-8'))
+        user_input["user"]
+        print(user_input["user"]["email"])
+        
+        existing_user = db.user.find_one({'email': user_input["user"]["email"]})
+        
+        if not existing_user:
+            return jsonify({'message': 'No Email exists'}), 400
+        
+        
+        user_db=db.user.find_one({"email":user_input["user"]["email"]})
+        
+        if user_db['password']==user_input["user"]["password"]:
+            return jsonify({'message': 'Login successful'}), 200
+        else:
+            return jsonify({'message': 'Invalid email or password'}), 401
+    
+# signup
+@app.route("/signup", methods=["GET", "POST"])
+def Signup():
+    if request.method == 'POST':
+        user_input = request.data
+        user_input=literal_eval(user_input.decode('utf-8'))
+        print(user_input["user"])
+         # Check if the email is already registered
+        existing_user = db.user.find_one({'email': user_input["user"]["email"]})
+        
+        if existing_user:
+            return jsonify({'message': 'Email already exists'}), 400
+        try:
+           db.user.insert_one({"name":user_input["user"]["name"],"email":user_input["user"]["email"], "password":user_input["user"]["password"]})
+        except Exception as e:
+            return "Error in db"
+        return jsonify({'message': 'Registration successful'}), 200
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
