@@ -110,8 +110,7 @@ def Login():
     if request.method == 'POST':
         user_input = request.data
         user_input=literal_eval(user_input.decode('utf-8'))
-        user_input["user"]
-        print(user_input["user"]["email"])
+       
         
         existing_user = db.user.find_one({'email': user_input["user"]["email"]})
         
@@ -124,25 +123,28 @@ def Login():
         if user_db['password']==user_input["user"]["password"]:
             return jsonify({'message': 'Login successful'}), 200
         else:
-            return jsonify({'message': 'Invalid email or password'}), 401
+            return jsonify({'message': 'Invalid email or password'}),401
     
 # signup
+
 @app.route("/signup", methods=["GET", "POST"])
 def Signup():
     if request.method == 'POST':
         user_input = request.data
         user_input=literal_eval(user_input.decode('utf-8'))
-        print(user_input["user"])
-        
+        # print(user_input["user"]["email"])
+        # print(type(json.loads(user_input["user"])))
+        user_input=json.loads(user_input["user"])
+        print(user_input)
         # Check if the email is already registered
         #  print(collection.find_one({"_id": ObjectId("59d7ef576cab3d6118805a20")}))
         
-        existing_user = db.user.find_one({'email': user_input["user"]["email"]})
+        existing_user = db.user.find_one({'email': user_input["email"]})
         
         if existing_user:
             return jsonify({'message': 'Email already exists'}), 400
         try:
-           db.user.insert_one({"name":user_input["user"]["name"],"email":user_input["user"]["email"], "password":user_input["user"]["password"]})
+           db.user.insert_one({"name":user_input["name"],"email":user_input["email"], "password":user_input["password"]})
         except Exception as e:
             return "Error in db"
         return jsonify({'message': 'Registration successful'}), 200
