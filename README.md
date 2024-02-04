@@ -6,7 +6,7 @@
 
 In the dynamic landscape of education, students in secondary and higher secondary levels often face challenges in making informed career choices. Traditional career counseling methods may not always be readily accessible or personalized. The challenge is to develop an AI Chat-based application that serves as an interactive and intelligent platform for guiding students through their career exploration and decision-making process.
 
-## Problem
+## Problem we have solved 
 
 - **Limited Access to Personalized Counseling:** Many students lack access to personalized career counseling due to constraints like limited availability of counselors and resources.
 
@@ -33,11 +33,21 @@ The primary goal of this challenge is to design and implement an AI Chat-based a
    - Provide guidance on suitable educational pathways, including college courses, certifications, and vocational training.
 
 5. **Skill Development Recommendations:**
-   - Suggest skill development opportunities and resources to help students prepare for their chosen career paths.
+   - Suggest skill development opportunities and resources to help students prepare for their chosen career paths with the help of email and sms related to their interest in a particular domain.
 
 6. **Progress Tracking:**
    - Implement features to track students' progress, allowing for continuous guidance and adjustments as they explore and develop their career goals.
+  
+## Unique Features:
+1. **Opportunity Notifications**
+   - provide email and sms alert to the students for different opportunities related to their domain
+     
+2. **Resume Scan**
+   - We have build our own resume scan model to fetch and extract user information
 
+3. **Counseller application Dashboard**
+4. **In-Person Counselling**
+5. **Test Your Skills**
 
 ## Technologies Used
 
@@ -57,5 +67,9 @@ The primary goal of this challenge is to design and implement an AI Chat-based a
 
 1. Install the necessary dependencies.
 2. Run the Flask backend.
-3. Run the React frontend. 
+3. Run the React frontend.
+
+## Architecture
+![Screenshot (159)](https://github.com/DhananjayDogne/nit_b_chatbot_2/assets/120880974/968187f5-fb30-403c-a76d-3ff8a9859172)
+
 
