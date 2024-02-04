@@ -4,6 +4,7 @@ const TestLinks = () => {
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <div className="container mx-auto">
+                <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Test Links</h1>
                 {/* First Container */}
                 <div className="bg-white w-[70%] m-auto p-8 my-8 rounded-md shadow-lg border-2 border-rgb-94-246-246 hover:shadow-xl hover:transform hover:scale-105 transition-transform duration-300">
                     <h2 className="text-3xl font-bold mb-4 text-gray-800">DBMS</h2>
