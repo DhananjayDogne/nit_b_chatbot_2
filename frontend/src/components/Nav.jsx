@@ -6,7 +6,7 @@ const Chat = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('email');
         navigate('/login');
     }
     return (
@@ -22,7 +22,7 @@ const Chat = () => {
             </ul>
 
             <div className="ml-auto my-auto pr-[6rem]">
-                {!localStorage.getItem('token') ? (<>
+                {!localStorage.getItem('email') ? (<>
                     <Link className={`link ${location.pathname === '/login' ? "active" : ""}`} to='/login'>Login</Link>
                     <Link className={`link ${location.pathname === '/signup' ? "active" : ""}`} to='/signup'>Signup</Link>
                 </>)
