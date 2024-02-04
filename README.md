@@ -56,6 +56,7 @@ The primary goal of this challenge is to design and implement an AI Chat-based a
 
 - **Backend:**
   - Flask (Python).
+  - Email kit
 
 - **Database**
   - MongoDB
