@@ -12,17 +12,15 @@ const Login = () => {
         const response =await axios.post('http://127.0.0.1:5000/login', {
             user: user,
         });
-        const json = await response.json();
-        console.log(json);
-        if (json.success) { 
+        
+        if (response.status == 200) { 
             //Save And Redirect To Home
-            localStorage.setItem("token", json.token)
+            localStorage.setItem("email", user['email']);
             navigate('/');
         } else {
-            if (json.error) alert(json.error);
-            else {
+            
                 alert("Some error occurred .PLease try again !");
-            }
+            
         }
     }
 
