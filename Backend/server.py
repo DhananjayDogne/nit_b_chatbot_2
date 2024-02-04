@@ -98,6 +98,28 @@ def match(text):
         mail_send(message)
 
 
+@app.route('/upload_resume', methods=['POST'])
+def upload_resume():
+    if 'resume' not in request.files:
+        return "No file selected.", 400
+
+    resume_file = request.files['resume']
+
+    if resume_file.filename == '' or not allowed_file(resume_file.filename):
+        return "Invalid file.", 400
+
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'resumes')
+    os.makedirs(upload_folder, exist_ok=True)
+    resume_path = os.path.join(upload_folder, resume_file.filename)
+    resume_file.save(resume_path)
+
+    extracted_text = pdf_to_text(resume_path)
+
+    match(extracted_text)
+
+    return {"message": "Resume uploaded successfully.", "extracted_text": extracted_text}
+
+
 def pdf_to_text(pdf_path):
     pdf_document = fitz.open(pdf_path)
     text = ''
