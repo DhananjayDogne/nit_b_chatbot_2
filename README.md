@@ -2,6 +2,8 @@
 
 # AI Chat-based Career Counseling Application
 
+Career mantri is an AI based chatbot with many unique features such as one to one mentoring session with mentors, Resume Scanner, Opportunity Notifications related to interested domain and Counseller application Dashboard.
+
 ## Overview
 
 In the dynamic landscape of education, students in secondary and higher secondary levels often face challenges in making informed career choices. Traditional career counseling methods may not always be readily accessible or personalized. The challenge is to develop an AI Chat-based application that serves as an interactive and intelligent platform for guiding students through their career exploration and decision-making process.
