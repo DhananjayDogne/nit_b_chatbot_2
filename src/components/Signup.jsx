@@ -13,17 +13,17 @@ export const Signuppage = () => {
         const response = await axios.post('http://127.0.0.1:5000/signup', {
             user:JSON.stringify({ name, email, password })
         });
-        const json = await response.json();
-        console.log(json);
-        if (json.success) {
-            //Save And Redirect To Home
-            localStorage.setItem("token", json.token)
+       
+        console.log(response);
+       
+        if (response.status==200) {
+        //     //Save And Redirect To Home
+             localStorage.setItem("email", user['email']);
             navigate('/');
         } else {
-            if (json.error) alert(json.error);
-            else {
+            
                 alert("Some error occurred .PLease try again !");
-            }
+            
         }
     }
     

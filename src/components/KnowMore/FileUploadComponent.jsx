@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUpload } from 'react-icons/fa';
+import Popup from './Popup'; // Adjust the import path
 
 const FileUploadComponent = ({ onFileUpload }) => {
     const [file, setFile] = useState(null);
+    const [isPopupOpen, setPopupOpen] = useState(false);
 
     const handleFileUpload = async () => {
         try {
@@ -14,32 +16,32 @@ const FileUploadComponent = ({ onFileUpload }) => {
 
             const formData = new FormData();
             formData.append('resume', file);
-            console.log(formData['resume']);
-            // Assuming you have an endpoint for file upload in your Flask server
-            const response = await axios.post('http://127.0.0.1:5000/upload_resume', formData);
+            setPopupOpen(true);
+            const response = await axios.post('http://127.0.0.1:80/upload_resume', formData);
 
-            // Handle the response, trigger scanning, etc.
             console.log(response.data);
 
-            // Reset the file state after successful upload
             setFile(null);
 
-            // Pass the uploaded file information to the parent component
-            onFileUpload(response.data);
+
+            onFileUpload(response.data); // You can handle the response data as needed in your React component
         } catch (error) {
             console.error('Error uploading file:', error);
         }
+    };
+
+    const handleClosePopup = () => {
+        setPopupOpen(false);
     };
 
     return (
         <>
             <div className='text-center '>
                 <div className='px-2 text-lg font-semibold'> Upload Resume <br /> </div>
-
-                <div className='px-2 text-sm '>Sccan</div>
+                <div className='px-2 text-sm '>Scan</div>
             </div>
-            <div className='flex m-2  p-4 cursor-pointer bg-white border border-gray-300 rounded-lg shadow-md'>
 
+            <div className='flex m-2 p-4 cursor-pointer bg-white border border-gray-300 rounded-lg shadow-md'>
                 <label htmlFor='fileInput' className='w-[100%] cursor-pointer'>
                     <input
                         id='fileInput'
@@ -51,11 +53,21 @@ const FileUploadComponent = ({ onFileUpload }) => {
                 </label>
 
                 <div className='flex justify-center'>
-                    <button onClick={handleFileUpload} className='bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600'>
+                    <button
+                        onClick={handleFileUpload}
+                        className='bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600'
+                    >
                         Upload
                     </button>
                 </div>
             </div>
+
+            {isPopupOpen && (
+                <Popup isOpen={isPopupOpen} onClose={handleClosePopup}>
+                    <h2>File Uploaded Successfully!</h2>
+                    <p>Your file has been successfully uploaded.</p>
+                </Popup>
+            )}
         </>
     );
 };

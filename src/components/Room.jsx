@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { appId,serverScret } from "./Config";
+import { appId, serverScret } from "./Config";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 
 const Room = () => {
@@ -16,13 +16,13 @@ const Room = () => {
             showScreenSharingButton: false,
             sharedLinks: [{
                 name: "Copy Link",
-                url:window.location.href
+                url: window.location.href
             }]
         });
     }
     return (
         <div ref={meeting} className="w-[100vw] h-[100vh]">
-             Room Id : {roomId}
+            Room Id : {roomId}
         </div>
     )
 }
